@@ -69,13 +69,15 @@ void PutObjectMap(TObject obj)
             if (IsPosInMap(i, j))
                 map[j][i] = '@';
 }
+
 void ClearMap()
 {
-    for (int i = 0; i < mapWidth; i++)
-        map[0][i] = '.';
-    map[0][mapWidth] = '\0';
-    for (int j = 1; j < mapHeight; j++)
-        strcpy(map[j], map[0]);
+    for (int j = 0; j < mapHeight; j++)
+    {
+        for (int i = 0; i < mapWidth; i++)
+            map[j][i] = '.';
+        map[j][mapWidth] = '\0';
+    }
 }
 
 void ShowMap()
@@ -99,7 +101,6 @@ void HorizonMoveMap(float dx)
     {
         brick[i].x += dx;
     }
-    brick[0].x += dx;
 }
 BOOL IsCollision(TObject o1, TObject o2)
 {
