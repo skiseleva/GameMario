@@ -162,8 +162,18 @@ void CreateLevel(int lvl)
     }
 }
 
+void hide_cursor()
+{
+    void *handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO structCursorInfo;
+    GetConsoleCursorInfo(handle, &structCursorInfo);
+    structCursorInfo.bVisible = FALSE;
+    SetConsoleCursorInfo(handle, &structCursorInfo);
+}
+
 int main()
 {
+    hide_cursor();
     CreateLevel(level);
     system("color 9F");
 
