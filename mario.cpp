@@ -1,7 +1,9 @@
 #include <iostream>
+#include <stdio.h>
 #include <cstring>
+#include <stdlib.h>
 
-#include <cmath>
+#include <math.h>
 #include <windows.h>
 
 using namespace std;
@@ -14,7 +16,7 @@ typedef struct SObject
     float x, y;
     float width, height;
     float vertSpeed;
-    BOOL IsFly;
+    bool IsFly;
     char cType;
 } TObject;
 
@@ -38,7 +40,7 @@ void InitObject(TObject *obj, float xPos, float yPos, float oWidth, float oHeigh
     (*obj).cType = inType;
 }
 
-BOOL IsCollision(TObject o1, TObject o2);
+bool IsCollision(TObject o1, TObject o2);
 void CreateLevel(int lvl);
 
 void VertMoveObject(TObject *obj)
@@ -65,7 +67,7 @@ void VertMoveObject(TObject *obj)
         }
 }
 
-BOOL IsPosInMap(int x, int y)
+bool IsPosInMap(int x, int y)
 {
     return ((x >= 0) && (x <= mapWidth) && (y >= 0) && (y <= mapHeight));
 }
@@ -125,7 +127,7 @@ void HorizonMoveMap(float dx)
         brick[i].x += dx;
     }
 }
-BOOL IsCollision(TObject o1, TObject o2)
+bool IsCollision(TObject o1, TObject o2)
 {
     return ((o1.x + o1.width) > o2.x) && (o1.x < (o2.x + o2.width)) &&
            ((o1.y + o1.height) > o2.y) && (o1.y < (o2.y + o2.height));
