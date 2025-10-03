@@ -97,6 +97,17 @@ void setCur(int x, int y)
 
 void HorizonMoveMap(float dx)
 {
+    mario.x -= dx;
+    for (int i = 0; i < brickLength; i++)
+    {
+        if (IsCollision(mario, brick[i]))
+        {
+            mario.x += dx;
+            return;
+        }
+    }
+    mario.x += dx;
+
     for (int i = 0; i < brickLength; i++)
     {
         brick[i].x += dx;
@@ -135,6 +146,9 @@ int main()
             HorizonMoveMap(1);
         if (GetKeyState('D') < 0)
             HorizonMoveMap(-1);
+
+        if (mario.y > mapHeight)
+            CreateLevel();
 
         VertMoveObject(&mario);
         for (int i = 0; i < brickLength; i++)
